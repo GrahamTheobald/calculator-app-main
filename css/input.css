@@ -4,8 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 @layer base {
-    :root {
+    :root, .theme1 {
         --color-bg-main: hsl(222, 26%, 31%);
         --color-bg-keypad: hsl(223, 31%, 20%);
         --color-bg-screen: hsl(224, 36%, 15%);
@@ -37,8 +39,7 @@
         --color-text-c: hsl(0, 0%, 100%);
         --color-text-d: hsl(0, 0%, 100%);
         --color-toggle-bg: var(--color-bg-keypad);
-        --color-toggle: var(--color-btn2-bg);
-
+        --color-toggle: var(--color-btn2-bg)
     }
     .theme3 {
         --color-bg-main: hsl(268, 75%, 9%);
@@ -58,9 +59,18 @@
         --color-toggle: var(--color-btn2-bg);
     }
 }
-
+   
 @layer components {
     .btn {
-        @apply rounded-md w-full h-12 shadow-md hover:brightness-150
+        @apply rounded-md w-full h-12 shadow-[0_4px_2px] hover:brightness-150
+    }
+    [data-theme=""] {
+        justify-content: flex-start;
+    }
+    [data-theme="2"] {
+        justify-content: center;
+    }
+    [data-theme="3"] {
+        justify-content: flex-end;
     }
 }
