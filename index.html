@@ -3,24 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+  <link rel="stylesheet" href="./css/styles.css">
   <title>Frontend Mentor | Calculator app</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
 </head>
-<body>
+<body class=" font-League-Spartan min-h-screen font-bold flex items-center justify-center p-6 bg-skin-main">
+  <div class=" w-full max-w-[30rem]">
+    <div class=" text-skin-a flex justify-between items-center">
+      <div class=" text-2xl">calc</div>
+      <div class=" flex gap-6 items-center">
+        <div class=" text-xs">THEME</div>
+        <div>
+          <div class=" relative">
+            <div class=" absolute bottom-full left-2 right-2 flex justify-between text-sm mb-1">
+              <div class=" text-xs">1</div><div class=" text-xs">2</div><div class=" text-xs">3</div>
+            </div>
+            <div data-toggle="1" class=" bg-skin-toggle-bg w-16 h-7 px-2 rounded-full flex items-center">
+              <div data-toggle class=" bg-skin-toggle w-4 h-4 rounded-full hover:cursor-pointer hover:brightness-150 justify-self-end"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-skin-a bg-skin-screen p-6 rounded-lg my-6">
+      <div class=" text-[2.5rem] ml-auto w-min">399,981</div>
+    </div>
+    <div class="bg-skin-keypad grid grid-cols-4 p-6 gap-4 rounded-lg">
+      <button data-digit="7"class="text-skin-b bg-skin-btn3-bg shadow-skin-btn3-shadow text-3xl btn">
+        7
+      </button>
+      <button data-digit="8"class="text-skin-b bg-skin-btn3-bg shadow-skin-btn3-shadow text-3xl btn">
+        8
+      </button>
+      <button data-digit="9"class="text-skin-b bg-skin-btn3-bg shadow-skin-btn3-shadow text-3xl btn">
+        9
+      </button>
+      <button data-func="del" class="text-skin-c bg-skin-btn1-bg shadow-skin-btn1-shadow btn">
+        DEL
+      </button>
+      <button data-digit="4"class="text-skin-b bg-skin-btn3-bg shadow-skin-btn3-shadow text-3xl btn">
+        4
+      </button>
+      <button data-digit="5"class="text-skin-b bg-skin-btn3-bg shadow-skin-btn3-shadow text-3xl btn">
+        5
+      </button>
+      <button data-digit="6"class="text-skin-b bg-skin-btn3-bg shadow-skin-btn3-shadow text-3xl btn">
+        6
+      </button>
+      <button data-operator="+" class="text-skin-b bg-skin-btn3-bg shadow-skin-btn3-shadow text-3xl btn">
+        +
+      </button>
+      <button data-digit="1"class="text-skin-b bg-skin-btn3-bg shadow-skin-btn3-shadow text-3xl btn">
+        1
+      </button>
+      <button data-digit="2"class="text-skin-b bg-skin-btn3-bg shadow-skin-btn3-shadow text-3xl btn">
+        2
+      </button>
+      <button data-digit="3"class="text-skin-b bg-skin-btn3-bg shadow-skin-btn3-shadow text-3xl btn">
+        3
+      </button>
+      <button data-operator="-" class="text-skin-b bg-skin-btn3-bg shadow-skin-btn3-shadow text-3xl btn">
+        -
+      </button>
+      <button data-digit="."class="text-skin-b bg-skin-btn3-bg shadow-skin-btn3-shadow text-3xl btn">
+        .
+      </button>
+      <button data-digit="0"class="text-skin-b bg-skin-btn3-bg shadow-skin-btn3-shadow text-3xl btn">
+        0
+      </button>
+      <button data-operator="/" class="text-skin-b bg-skin-btn3-bg shadow-skin-btn3-shadow text-3xl btn">
+        /
+      </button>
+      <button class="text-skin-b bg-skin-btn3-bg shadow-skin-btn3-shadow text-3xl btn">
+        x
+      </button>
+      <button data-func="reset" class="text-skin-c bg-skin-btn1-bg shadow-skin-btn1-shadow btn col-span-2">
+        RESET
+      </button>
+      <button data-func="equals" class="text-skin-d bg-skin-btn2-bg shadow-skin-btn2-shadow btn col-span-2">
+        =
+      </button>
 
-
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
+    </div>
   </div>
 </body>
 </html>
