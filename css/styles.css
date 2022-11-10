@@ -702,10 +702,6 @@ video {
   gap: 1rem;
 }
 
-.overflow-auto{
-  overflow: auto;
-}
-
 .overflow-x-scroll{
   overflow-x: scroll;
 }
@@ -824,6 +820,14 @@ video {
 .shadow-skin-btn2-shadow{
   --tw-shadow-color: var(--color-btn2-shadow);
   --tw-shadow: var(--tw-shadow-colored);
+}
+
+.duration-75{
+  transition-duration: 75ms;
+}
+
+.duration-300{
+  transition-duration: 300ms;
 }
 
 .hover\:cursor-pointer:hover{

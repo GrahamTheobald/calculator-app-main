@@ -57,16 +57,13 @@ export default class Calculator {
   updateScreen() {
     if (this.resultScreen) {
       this.screen.innerText = this.format(this.result) 
-      console.log(this)
       return
     }
     if (this.operator) {
       this.screen.innerText = this.format(this.operand2)
-      console.log(this)
       return 
     }
     this.screen.innerText = this.format(this.operand1)
-    console.log(this)
   }
 
   equals() {
@@ -86,11 +83,10 @@ export default class Calculator {
         result = parseFloat(this.operand1) - parseFloat(this.operand2)
         break
     }
-    this.operand1 = "0"
-    this.operand2 = "0"
-    this.operator = null
+    
     this.result = result
     this.resultScreen = true
+    this.reset(true)
     this.updateScreen()
   }
 
@@ -108,19 +104,19 @@ export default class Calculator {
     this.updateScreen()
   }
 
-  reset() {
+  reset(result = false) {
     this.operand1 = "0"
     this.operand2 = "0"
     this.operator = null
-    this.resultScreen = false
+    this.resultScreen = result
     this.updateScreen()
   }
 
+  formatter = new Intl.NumberFormat()
+
   format(string) {
-
     let split = string.toString().split('.')
-    let int = new Intl.NumberFormat().format(split[0])
-
+    let int = this.formatter.format(split[0])
     return `${int}${split[1] ? `.${split[1].slice(0, 8)}` : ''}`
   }
 }
