@@ -2,8 +2,6 @@ const OPERANDS = ['*', '/', '+', '-']
 const FUNCTIONS = ['del', 'reset', 'equals']
 const DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.']
 
-
-
 export default class Calculator {
   constructor(screen) {
     this.screen = screen
@@ -33,9 +31,26 @@ export default class Calculator {
     this.resultScreen = false
 
     if (OPERANDS.includes(n)) {
-      if (this.operator) {
+      if (this.operator && n !== '-') {
         return this.equals()
       }
+      if (n === '-') {
+        if (this.operator) {
+          if (this.operand2 === '0') {
+            this.operand2 = this.process(n, this.operand2)
+            return this.updateScreen()
+          }
+          else if (this.operand2 === '-') return
+        }
+        else {
+          if (this.operand1 === '0') {
+            this.operand1 = this.process(n, this.operand1)
+            return this.updateScreen()
+          }
+          else if (this.operand1 === '-') return
+        }
+      }
+
       this.operator = n
       this.updateScreen()
       return
@@ -49,7 +64,8 @@ export default class Calculator {
   }
 
   process(n, activeOperand) {
-    if (n === '.' && activeOperand.includes('.')) return activeOperand
+    if (n === '.' && activeOperand.includes('.')) return
+    activeOperand
     if (activeOperand === '0') return n
     return activeOperand + n
   }
@@ -115,6 +131,7 @@ export default class Calculator {
   formatter = new Intl.NumberFormat()
 
   format(string) {
+    if (string === "-") return string
     let split = string.toString().split('.')
     let int = this.formatter.format(split[0])
     return `${int}${split[1] ? `.${split[1].slice(0, 8)}` : ''}`
