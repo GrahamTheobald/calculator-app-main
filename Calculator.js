@@ -18,49 +18,55 @@ export default class Calculator {
     if (n === 'reset') return this.reset()
     if (n === 'del') return this.delete()
     if (n === 'equals') return this.equals()
+    if (OPERANDS.includes(n)) return this.operatorFunc(n)
+    if (DIGITS.includes(n)) return this.digitFunc(n)
+    this.updateScreen()
+  }
 
-    if (this.resultScreen && OPERANDS.includes(n)) {
+  digitFunc(n) {
+    if (this.resultScreen) {
+      this.operand1 = this.process(n, '0')
+      this.resultScreen = false
+      return this.updateScreen()
+    }
+    this.operator ? 
+    this.operand2 = this.process(n, this.operand2) : 
+    this.operand1 = this.process(n, this.operand1)
+    return this.updateScreen()
+  }
+
+  operatorFunc(n) {
+    if (this.resultScreen) {
       this.operand1 = this.result
       this.result = null
       this.resultScreen = false 
       this.operator = n
-      this.updateScreen()
-      return
+      return this.updateScreen()
     }
-
-    this.resultScreen = false
-
-    if (OPERANDS.includes(n)) {
-      if (this.operator && n !== '-') {
-        return this.equals()
-      }
-      if (n === '-') {
-        if (this.operator) {
-          if (this.operand2 === '0') {
-            this.operand2 = this.process(n, this.operand2)
-            return this.updateScreen()
-          }
-          else if (this.operand2 === '-') return
+    if (n === '-') return this.minusFunc()
+    if (this.operator) return this.equals()
+    this.operator = n
+    return this.updateScreen()
+  }
+  
+  minusFunc() {
+    if (n === '-') {
+      if (this.operator) {
+        if (this.operand2 === '0') {
+          this.operand2 = this.process(n, this.operand2)
+          return this.updateScreen()
         }
-        else {
-          if (this.operand1 === '0') {
-            this.operand1 = this.process(n, this.operand1)
-            return this.updateScreen()
-          }
-          else if (this.operand1 === '-') return
-        }
+        else if (this.operand2 === '-') return
+        else return this.equals()
       }
-
-      this.operator = n
-      this.updateScreen()
-      return
+      else {
+        if (this.operand1 === '0') {
+          this.operand1 = this.process(n, this.operand1)
+          return this.updateScreen()
+        }
+        else if (this.operand1 === '-') return
+      }
     }
-
-    this.operator ? 
-      this.operand2 = this.process(n, this.operand2) : 
-      this.operand1 = this.process(n, this.operand1)
-    
-    this.updateScreen()
   }
 
   process(n, activeOperand) {
@@ -99,7 +105,6 @@ export default class Calculator {
         result = parseFloat(this.operand1) - parseFloat(this.operand2)
         break
     }
-    
     this.result = result
     this.resultScreen = true
     this.reset(true)
@@ -121,7 +126,7 @@ export default class Calculator {
   }
 
   reset(result = false) {
-    this.operand1 = "0"
+    this.operand1 = result ? this.result : "0"
     this.operand2 = "0"
     this.operator = null
     this.resultScreen = result
