@@ -50,28 +50,25 @@ export default class Calculator {
   }
   
   minusFunc() {
-    if (n === '-') {
-      if (this.operator) {
-        if (this.operand2 === '0') {
-          this.operand2 = this.process(n, this.operand2)
-          return this.updateScreen()
-        }
-        else if (this.operand2 === '-') return
-        else return this.equals()
-      }
-      else {
-        if (this.operand1 === '0') {
-          this.operand1 = this.process(n, this.operand1)
-          return this.updateScreen()
-        }
-        else if (this.operand1 === '-') return
-      }
+    const operand = this.operator ? this.operand2 : this.operand1
+    if (operand === '0') {
+      this.operator ? 
+        this.operand2 = this.process('-', this.operand2):
+        this.operand1 = this.process('-', this.operand1)
+      return this.updateScreen()
     }
+    else if (operand === '-') {
+      this.operator ?
+        this.operand2 = '0' :
+        this.operand1 = '0'
+      return this.updateScreen()
+    }
+    else if (this.operator) return this.equals()
+    else this.operator = '-'
   }
 
   process(n, activeOperand) {
-    if (n === '.' && activeOperand.includes('.')) return
-    activeOperand
+    if (n === '.' && activeOperand.includes('.')) return activeOperand
     if (activeOperand === '0') return n
     return activeOperand + n
   }
@@ -81,11 +78,9 @@ export default class Calculator {
       this.screen.innerText = this.format(this.result) 
       return
     }
-    if (this.operator) {
-      this.screen.innerText = this.format(this.operand2)
-      return 
-    }
-    this.screen.innerText = this.format(this.operand1)
+    this.operator ?
+      this.screen.innerText = this.format(this.operand2) :
+      this.screen.innerText = this.format(this.operand1)
   }
 
   equals() {
